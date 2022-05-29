@@ -37,7 +37,7 @@ export default function Dashboard(props) {
   const listItems = states.map((category,index) =>
     <Card>
       <Card.Body>
-        <Link to="/products"><h2 className="text-center mb-4">{category}</h2></Link>
+        <Link to={{pathname:"/products" ,state: category }}><h2 className="text-center mb-4">{category}</h2></Link>
       </Card.Body>
     </Card>
   );

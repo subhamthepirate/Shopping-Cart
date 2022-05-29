@@ -1,12 +1,15 @@
 import React from 'react'
 import { Navbar,Container,Row, Card, Button, CardGroup } from "react-bootstrap"
 import {useEffect,useState} from 'react'
-import { Link } from "react-router-dom"
+import { Link,useLocation } from "react-router-dom"
 import axios from 'axios'
 import { Audio } from  'react-loader-spinner'
 import { FaShoppingCart,FaCartPlus,FaStar } from 'react-icons/fa';
 
 function Products() {
+  const location = useLocation()
+  const filter = location.state
+  console.log(filter)
     const [states, setStates] = useState([]);
     useEffect(() => {
         axios
@@ -33,8 +36,8 @@ console.log(states)
         {states.length?
         <Row xs={2} md={2} className="g-6">
             { states.map((category,index) =>
-              
-            <CardGroup>
+               (category.category==filter)? 
+                <CardGroup>
                 <Card style={{ width: '20rem'}}>
                 <Card.Img variant="top" src={category.image} width="20px" length="20px"/>
                 <Card.Body>
@@ -50,7 +53,8 @@ console.log(states)
                 </Card.Footer>
                 </Card>
             </CardGroup>
-          )}
+              :<></>
+        )}
           </Row>
         :
             <Audio
