@@ -3,14 +3,27 @@ import { Navbar,Container,Row, Card, Button, CardGroup } from "react-bootstrap"
 import {useState} from 'react'
 import { Link,useLocation } from "react-router-dom"
 import { InfinitySpin } from  'react-loader-spinner'
-import { FaShoppingCart,FaCartPlus,FaStar,FaDollarSign } from 'react-icons/fa';
+import { FaShoppingCart,FaCartArrowDown,FaDollarSign } from 'react-icons/fa';
 
 function Cart() {
   let totalvalue=0;
     const [states, setStates] = useState([]);
     const location = useLocation()
   const filter = location.state
+  let len = filter.length
   console.log(filter)
+  const sub = ((e)=>{
+    var pp=0;
+    console.log(e.id);
+    filter.map((a,index)=>{
+      {console.log(a.id )}
+      if(filter[index].id == a.id)
+      {pp=filter.splice(index, 1)}
+    })
+    len = filter.length
+    console.log("All the values"+JSON. stringify(pp))
+    document.getElementById("cartvalue").innerText = len;
+  })
 return (
   <div>
   <Navbar expand="lg" variant="light" bg="light" sticky="top" >
@@ -34,7 +47,7 @@ return (
               {console.log(category)}
           <Card.Title>{category.title}</Card.Title>
           <Card.Text><h5>Price:</h5>{category.price} <FaDollarSign/></Card.Text>
-          <Button variant="primary">+</Button>
+          <Button variant="primary" onClick={()=>sub(category)}><FaCartArrowDown/></Button>
           </Card.Body>
           <Card.Footer>
               <small className="text-muted">{category.category}</small>

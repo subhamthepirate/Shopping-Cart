@@ -5,7 +5,6 @@ import { Link,useLocation } from "react-router-dom"
 import axios from 'axios'
 import { InfinitySpin } from  'react-loader-spinner'
 import { FaShoppingCart,FaCartPlus,FaStar,FaDollarSign } from 'react-icons/fa';
-import { CartProvider, useCart } from "react-use-cart";
 
 function Products() {
   const location = useLocation()
@@ -33,10 +32,9 @@ function Products() {
       console.log(addd);
       setaddItem(addd)
       console.log("Length  :"+addd.length)
-      document.getElementById("cartvalue").value = addd.length;
+      document.getElementById("cartvalue").innerText = addd.length;
     }
     
-console.log(states)
   return (
     <div style={{width: 100 + '%'}}>
         <Navbar expand="lg" variant="light" bg="light" sticky="top" >

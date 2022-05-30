@@ -5,7 +5,7 @@ import { Link, useHistory } from "react-router-dom"
 import axios from 'axios';
 import { InfinitySpin } from  'react-loader-spinner'
 
-export default function Dashboard(props) {
+export default function Dashboard() {
   const [states, setStates] = useState([]);
   useEffect(() => {
     axios
@@ -37,7 +37,7 @@ export default function Dashboard(props) {
   const listItems = states.map((category,index) =>
     <Card>
       <Card.Body>
-        <Link to={{pathname:"/products" ,state: category }}><h2 className="text-center mb-4">{category}</h2></Link>
+      <Link to={{pathname:"/products" ,state: category }}><Button variant="primary"><h2 className="text-center mb-4">{category}</h2></Button></Link>
       </Card.Body>
     </Card>
   );
@@ -45,7 +45,7 @@ export default function Dashboard(props) {
   return (
     <div style={{maxwidth: 100 + '%'}}>
     {states.length?
-    <p>
+    <p style={{'text-align': 'center'}}>
     {listItems}</p>
     :
       <p><InfinitySpin
@@ -55,7 +55,7 @@ export default function Dashboard(props) {
     ariaLabel='loading'
     /></p>
       }
-      <Card>
+      <Card >
         <Card.Body>
           <h2 className="text-center mb-4">Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
