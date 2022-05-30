@@ -43,7 +43,7 @@ export default function Dashboard(props) {
   );
 
   return (
-    <>
+    <div style={{maxwidth: 100 + '%'}}>
     {states.length?
     <p>
     {listItems}</p>
@@ -70,5 +70,5 @@ export default function Dashboard(props) {
           Log Out
         </Button>
       </div>
-    </>
+    </div>
   )}
