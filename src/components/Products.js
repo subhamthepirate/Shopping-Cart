@@ -40,6 +40,7 @@ function Products() {
         <Navbar expand="lg" variant="light" bg="light" sticky="top" >
         <Container>
           <Navbar.Brand href="#">Shopping Kart</Navbar.Brand>
+          <Link to={{pathname:"/"}}><Button variant="primary">Home</Button></Link>
           <span>
           <Link to={{pathname:"/cart" ,state: addItem }}><FaShoppingCart /><sup id="cartvalue">{addd.length}</sup></Link>
           </span>

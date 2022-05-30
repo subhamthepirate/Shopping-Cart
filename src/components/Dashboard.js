@@ -33,7 +33,6 @@ export default function Dashboard() {
       setError("Failed to log out")
     }
   }
-  //console.log(states)
   const listItems = states.map((category,index) =>
     <Card>
       <Card.Body>

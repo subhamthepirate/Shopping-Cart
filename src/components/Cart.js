@@ -1,42 +1,53 @@
 import React from 'react'
 import { Navbar,Container,Row, Card, Button, CardGroup } from "react-bootstrap"
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import { Link,useLocation } from "react-router-dom"
-import { InfinitySpin } from  'react-loader-spinner'
+//import { InfinitySpin } from  'react-loader-spinner'
 import { FaShoppingCart,FaCartArrowDown,FaDollarSign } from 'react-icons/fa';
 
+
+  
 function Cart() {
-  let totalvalue=0;
-    const [states, setStates] = useState([]);
-    const location = useLocation()
-  const filter = location.state
-  let len = filter.length
+  
+  const [states, setStates] = useState([]);
+  const [noitems, setnoitems] = useState(-1);
+  const location = useLocation()
+  let filter
+  let totalvalue=0
+  
+  useEffect(() => {
+    if(location.state)
+    {setStates(location.state)
+    setnoitems(location.state.length)}
+    });
   console.log(filter)
   const sub = ((e)=>{
-    var pp=0;
     console.log(e.id);
-    filter.map((a,index)=>{
+    
+   let abcd = location.state;
+   abcd.map((a,index)=>{
       {console.log(a.id )}
-      if(filter[index].id == a.id)
-      {pp=filter.splice(index, 1)}
+      if(abcd[index].id == e.id)
+      {abcd.splice(index, 1)}
     })
-    len = filter.length
-    console.log("All the values"+JSON. stringify(pp))
-    document.getElementById("cartvalue").innerText = len;
+    setStates(abcd)
+    setnoitems(states.length);
+    document.getElementById("cartvalue").innerText = noitems;
   })
 return (
   <div>
   <Navbar expand="lg" variant="light" bg="light" sticky="top" >
   <Container>
     <Navbar.Brand href="#">Shopping Kart</Navbar.Brand>
+    <Link to={{pathname:"/"}}><Button variant="primary">Home</Button></Link>
     <span>
-    <Link to={{pathname:"/cart" }}><FaShoppingCart /><sup id="cartvalue">{filter.length}</sup></Link>
+    <Link to={{pathname:"/cart" }}><FaShoppingCart /><sup id="cartvalue">{noitems}</sup></Link>
     </span>
   </Container>
   </Navbar>
-  {filter.length?
+  {noitems?
   <Row xs={2} md={2} className="g-6">
-      { filter.map((category,index) =>
+      { states.map((category) =>
           <CardGroup style={{padding: 10 + 'px'}}>
             {
             console.log(totalvalue+=category.price)}
@@ -58,11 +69,12 @@ return (
   
     </Row>
   :
-      <InfinitySpin
-      height="100"
-      width="100"
-      color='grey'
-      ariaLabel='loading' />
+  <p>No items to show</p>
+      // <InfinitySpin
+      // height="100"
+      // width="100"
+      // color='grey'
+      // ariaLabel='loading' />
 }
 <h3>Total value of the cart : {totalvalue}</h3>
 </div>
